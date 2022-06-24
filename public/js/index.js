@@ -30,9 +30,15 @@ btnConnect.addEventListener("click", () => {
 		chatUsername.style.display = "none";
 		chatWindow.style.display = "block";
 		chatMessage.style.display = "block";
+
+		socket.emit("chat:user_connection", username.value);
 	} else {
 		alert("Ingrese un nombre de usuario");
 	}
+});
+
+message.addEventListener("keypress", () => {
+	socket.emit("chat:typing", username.value);
 });
 
 // recibe los datos del servidor
@@ -44,8 +50,10 @@ socket.on("chat:message", (data) => {
 	chatWindow.scrollTop = chatWindow.scrollHeight;
 });
 
-message.addEventListener("keypress", () => {
-	socket.emit("chat:typing", username.value);
+socket.on("chat:user_connection", (username) => {
+	output.innerHTML += `<p>
+    <strong>${username}</strong>: se ha conectado...
+  </p>`;
 });
 
 socket.on("chat:typing", (data) => {

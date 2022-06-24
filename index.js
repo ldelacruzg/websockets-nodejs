@@ -32,4 +32,8 @@ io.on("connection", (socket) => {
 		// envia los datos a las demás conexiones (excluye el que lo envio)
 		socket.broadcast.emit("chat:typing", data);
 	});
+
+	socket.on("chat:user_connection", (username) => {
+		io.sockets.emit("chat:user_connection", username);
+	});
 });
