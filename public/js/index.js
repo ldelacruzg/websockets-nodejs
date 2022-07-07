@@ -1,4 +1,4 @@
-// sie esta en diferente server, colocar el dominio como parametro
+// si esta en diferente server, colocar el dominio como parametro
 const socket = io();
 
 // DOM elements
