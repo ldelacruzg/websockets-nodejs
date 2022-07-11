@@ -29,6 +29,17 @@ body {
 	margin: 0 20px;
 }
 
+#output p a {
+	display: block;
+	border: 1px solid;
+	padding: 10px 15px;
+	border-radius: 5px;
+	margin-top: 5px;
+	text-decoration: none;
+	color: white;
+	background-color: #575ed8;
+}
+
 #actions p {
 	padding: 14px 0;
 	margin: 0 20px;
@@ -58,4 +69,8 @@ button {
 
 h1 {
 	text-align: center;
+}
+
+.text-end {
+	text-align: end;
 }

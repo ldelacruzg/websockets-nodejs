@@ -18,24 +18,26 @@ const server = app.listen(app.get("port"), () => {
 // settings websocket
 const io = new Server(server);
 
+// abrir la conexión de los sockets
 io.on("connection", (socket) => {
-	console.log("new connetion", socket.id);
+	/**
+	 * se escuchan los eventos enviados desde el cliente
+	 */
 
-	// escucha los datos del cliente
-	// envia un mensaje en texto plano y objeto JSON
-	socket.on("chat:message", (data) => {
-		// envia los datos a las demas conexiones (incluye el que lo envio)
-		io.sockets.emit("chat:message", data);
+	// envia un mensaje de conexión a los usuarios
+	socket.on("chat:user_connection", (username) => {
+		io.sockets.emit("chat:user_connection", username);
 	});
 
-	// envia un mensaje en texto plano
+	// se envia un mensaje en texto plano
 	socket.on("chat:typing", (data) => {
 		// envia los datos a las demás conexiones (excluye el que lo envio)
 		socket.broadcast.emit("chat:typing", data);
 	});
 
-	// envia un mensaje de conexión a los usuarios
-	socket.on("chat:user_connection", (username) => {
-		io.sockets.emit("chat:user_connection", username);
+	// se envia un mensaje en objeto JSON
+	socket.on("chat:message", (data) => {
+		// envia los datos a las demás conexiones (incluye el que lo envio)
+		io.sockets.emit("chat:message", data);
 	});
 });
